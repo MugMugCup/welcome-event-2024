@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript" src="bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="img/360_F_535915275_bzBLtYUmIIofc9LMA2vlip2ETfiYCjX.png"
+        />
+        <title>作成中</title>
+        <style>
+            .sssm {
+                margin: 0;
+                height: 20px;
+            }
+            .zumi {
+                background-color: coral;
+            }
+            .prepara {
+                background-color: tan;
+            }
+            .orange {
+                background-color: orange;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-6" style="text-align: center">
+                    <h1>動作中</h1>
+                    <div
+                        class="row bg-light"
+                        style="
+                            height: 80vh;
+                            border-width: 5px;
+                            border-radius: 3vh;
+                            width: 100%;
+                            overflow: scroll;
+                            text-align: left;
+                            padding: 3vh;
+                        "
+                        id="moving"
+                    ></div>
+                </div>
+                <div class="col-6" style="text-align: center">
+                    <h1>完了済み</h1>
+                    <div
+                        class="row bg-light"
+                        style="
+                            height: 80vh;
+                            border-width: 5px;
+                            border-radius: 3vh;
+                            width: 100%;
+                            overflow: scroll;
+                            text-align: left;
+                            padding: 3vh;
+                        "
+                        id="moved"
+                    ></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            eel.expose(logprint_moving);
+            function logprint_moving(text) {
+                output = document.createElement("div");
+                output.innerHTML = text;
+                output.id = text;
+                document.getElementById("moving").appendChild(output);
+                scroll_bottom_moving();
+            }
+            function scroll_bottom_moving() {
+                document.getElementById("moving").scrollTop =
+                    document.getElementById("moving").scrollHeight;
+            }
+            eel.expose(moving_remove);
+            function moving_remove(text) {
+                document.getElementById(text).remove();
+            }
+            eel.expose(logprint_moving_clear);
+            function logprint_moving_clear() {
+                document.getElementById("moving").innerHTML = "";
+            }
+            eel.expose(logprint_moved);
+            function logprint_moved(text) {
+                output = document.createElement("div");
+                output.innerHTML = text;
+                document.getElementById("moved").appendChild(output);
+                scroll_bottom_moved();
+            }
+            eel.expose(logprint_moved_clear);
+            function logprint_moved_clear() {
+                document.getElementById("moved").innerHTML = "";
+            }
+            function scroll_bottom_moved() {
+                document.getElementById("moved").scrollTop =
+                    document.getElementById("moved").scrollHeight;
+            }
+        </script>
+    </body>
+</html>

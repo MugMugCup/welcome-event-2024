@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>設定window</title>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript" src="bootstrap.min.js"></script>
+        <script type="text/javascript" src="leader-line.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    </head>
+    <style>
+        .mass {
+            width: 3em;
+            height: 3em;
+            border-radius: 1.5em;
+            background-color: #e5a211;
+        }
+        .leader-line {
+            z-index: -100;
+        }
+        .ship {
+            position: absolute;
+            transform-origin: top left;
+            width: 5em;
+            height: auto;
+            z-index: 100;
+        }
+        .hide {
+            visibility: hidden;
+        }
+    </style>
+    <body id="mainbord" style="width: 100vw; height: 100vh; overflow: hidden">
+        <!-- メッセージダイアログ -->
+        <div
+            class="modal fade"
+            id="mes_Modal"
+            tabindex="-1"
+            aria-labelledby="mes_ModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mes_ModalLabel">temp</h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body" id="mes_Modal_val">temp</div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            Main Menu
+                        </h1>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <button
+                                    class="btn-dark btn"
+                                    type="button"
+                                    id="pc_place"
+                                    data-bs-dismiss="modal"
+                                >
+                                    PC配置
+                                </button>
+                                <div style="float: left">
+                                    <input
+                                        type="text"
+                                        id="pc_width"
+                                        value="10"
+                                        placeholder="横幅の台数"
+                                    /><br />
+                                </div>
+                                <div style="float: left">
+                                    <input
+                                        type="text"
+                                        id="pc_num"
+                                        value="30"
+                                        placeholder="PCの台数"
+                                    /><br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button
+                                    class="btn btn-success"
+                                    id="finish_index"
+                                >
+                                    pcの配置関連終了
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main -->
+        <div
+            class="container d-flex flex-column justify-content-around"
+            id="bord1"
+            style="width: 100vw; height: 100vh"
+        ></div>
+        <img
+            style="
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                top: 0;
+                left: 0;
+                z-index: -1000;
+            "
+            src="img/IMG_1271.png"
+        />
+    </body>
+    <script>
+        //非表示用
+        let pc_temp_list = [];
+        //船のoffset(単位もつけて！)
+        let ship_offse_x = "- 3em";
+        ship_offse_y = "- 6em";
+        //0~nまでも仮想PCの座標
+        let pc_xy_list = [];
+        //pcの最大数
+        let pc_max_num = 0;
+        //pcが設定された数
+        let pc_now_num = 0;
+        //前回使ったpcのid
+        let pre_pc_id;
+        //pcとpcを結ぶ線のオブジェクトのリスト(初期化用)
+        var line_list = [];
+        //pcを描画する要素
+        const pc_bord = document.getElementById("bord1");
+        let teamlist = {};
+        //alertの代わり
+        const mes_Modal = new bootstrap.Modal(
+            document.getElementById("mes_Modal")
+        );
+        //eel.expose(mes_show);
+        function mes_show(lab, mes) {
+            document.getElementById("mes_Modal_val").innerHTML = mes;
+            document.getElementById("mes_ModalLabel").innerHTML = lab;
+            mes_Modal.show();
+        }
+        //設定用関数
+        const setting_Modal = new bootstrap.Modal(
+            document.getElementById("exampleModal")
+        );
+        document.getElementById("mainbord").addEventListener("keydown", () => {
+            if (event.shiftKey && event.code == "KeyS") {
+                setting_Modal.toggle();
+            }
+        });
+        document.getElementById("pc_place").addEventListener("click", () => {
+            let w = document.getElementById("pc_width").value;
+            let num = document.getElementById("pc_num").value;
+            place_pc(w, num);
+        });
+
+        document
+            .getElementById("finish_index")
+            .addEventListener("click", () => {
+                finish_pc_index();
+                setting_Modal.hide();
+            });
+        //船移動
+        function move_ship_2(teamname, move_x, move_y) {
+            let el = document.getElementById(`ship_${teamname}`);
+            //keyframes（キーフレームオブジェクトの配列）
+            const keyframes = [
+                {
+                    transform: `translate(${teamlist[teamname][0]}, ${teamlist[teamname][1]}`,
+                },
+                { transform: `translate(${move_x}, ${move_y})` },
+            ];
+            //options（タイミングオプション）
+            const timingOpts = {
+                duration: 500,
+                easing: "ease-in-out",
+                fill: "both",
+                composite: "accumulate",
+            };
+            el.animate(keyframes, timingOpts);
+            teamlist[teamname][0] = move_x;
+            teamlist[teamname][1] = move_y;
+        }
+        //移動用緩衝地帯関数
+        eel.expose(move_ship_1);
+        function move_ship_1(teamname, mass) {
+            let go_x = 0;
+            let go_y = 0;
+            mass = parseInt(mass);
+            if (mass >= pc_now_num) {
+                return;
+            }
+            //移動用座標作成
+            go_x = `calc(${pc_xy_list[mass][0] - pc_xy_list[0][0]}px)`;
+            go_y = `calc(${pc_xy_list[mass][1] - pc_xy_list[0][1]}px)`;
+            teamlist[teamname][2] = mass;
+            move_ship_2(teamname, go_x, go_y);
+        }
+        //船出現関数
+        eel.expose(set_ship);
+        function set_ship(teamname) {
+            if (pc_xy_list.length <= 0) {
+                return;
+            }
+            output = document.createElement("img");
+            output.src = "img/ship.png";
+            output.id = `ship_${teamname}`;
+            output.classList.add("ship");
+            pc_bord.appendChild(output);
+            let el = document.getElementById(`ship_${teamname}`);
+            el.style.top = `calc(${pc_xy_list[0][1]}px  ${ship_offse_y})`;
+            el.style.left = `calc(${pc_xy_list[0][0]}px  ${ship_offse_x})`;
+            teamlist[teamname] = ["0px", "0px", 0];
+        }
+        function resizeWindow() {
+            //いろいろ再代入
+            let i = 0;
+            pc_xy_list = [];
+            for (i = 0; i < pc_now_num; i++) {
+                let el = document.getElementById(`pc_child_${i}`);
+                let el_data = el.getBoundingClientRect();
+                let el_x = el_data.left + el_data.height / 2;
+                let el_y = el_data.top + el_data.width / 2;
+                pc_xy_list.push([el_x, el_y]);
+            }
+            if (teamlist.length == 0) {
+                return;
+            }
+            Object.keys(teamlist).map((key) => {
+                let el = document.getElementById(`ship_${key}`);
+                el.style.top = `calc(${pc_xy_list[0][1]}px ${ship_offse_y})`;
+                el.style.left = `calc(${pc_xy_list[0][0]}px ${ship_offse_x})`;
+                let mass = teamlist[key][2];
+                go_x = `calc(${pc_xy_list[mass][0] - pc_xy_list[0][0]}px)`;
+                go_y = `calc(${pc_xy_list[mass][1] - pc_xy_list[0][1]}px)`;
+                move_ship_2(key, go_x, go_y);
+            });
+        }
+        //タイマーID格納用の変数を宣言
+        let timer;
+        //リサイズが行われたときのイベントリスナ
+        window.addEventListener("resize", function () {
+            //過剰に関数が動かないようにする処理
+            clearTimeout(timer);
+            timer = setTimeout(resizeWindow, 300);
+        });
+
+        function finish_pc_index() {
+            hidden_other_pc();
+            mes_show("info", "pcの配置関連づけが完了しました");
+        }
+
+        function hidden_other_pc() {
+            if (0 < pc_temp_list.length) {
+                while (pc_temp_list.length) {
+                    document
+                        .getElementById(pc_temp_list.pop())
+                        .classList.add("hide");
+                }
+            }
+        }
+        let pre_el_x = 0,
+            pre_el_y = 0;
+        //再設定
+        function pc_solve1(p_n) {
+            el = document.getElementById(p_n);
+            pc_temp_list = pc_temp_list.filter((n) => n != p_n);
+            //即値関数で登録しているためそれの対処
+            const clonedel = el.cloneNode(true);
+            el.replaceWith(clonedel);
+            el = document.getElementById(p_n);
+            let el_data = el.getBoundingClientRect();
+            let el_x = el_data.left + el_data.height / 2;
+            let el_y = el_data.top + el_data.width / 2;
+            pc_xy_list.push([el_x, el_y]);
+            el.classList.add("text-center");
+            el.innerHTML = `${pc_now_num}`;
+            //即値関数で関数へ渡す値の固定化
+            ((data) => {
+                el.addEventListener("click", () => {
+                    pc_solve2(data);
+                });
+            })(pc_now_num);
+            el.id = `pc_child_${pc_now_num}`;
+            if (pc_now_num == pc_max_num - 1) {
+                mes_show("info", "pcの配置関連づけが完了しました");
+                line_list.push(
+                    new LeaderLine(
+                        LeaderLine.pointAnchor(
+                            document.getElementById(pre_pc_id),
+                            {
+                                x: "50%",
+                            }
+                        ),
+                        LeaderLine.pointAnchor(document.getElementById(el.id), {
+                            x: "50%",
+                        }),
+                        {
+                            outline: true,
+                            size: 20,
+                            color: "rgb(248, 205, 30)",
+                            outlineColor: "rgb(198, 109, 59)",
+                            startPlug: "behind",
+                            endPlug: "behind",
+                        }
+                    )
+                );
+            } else if (pc_now_num == 0) {
+            } else {
+                //線を書く
+                line_list.push(
+                    new LeaderLine(
+                        LeaderLine.pointAnchor(
+                            document.getElementById(pre_pc_id),
+                            {
+                                x: "50%",
+                            }
+                        ),
+                        LeaderLine.pointAnchor(document.getElementById(el.id), {
+                            x: "50%",
+                        }),
+                        {
+                            outline: true,
+                            size: 20,
+                            color: "rgb(248, 205, 30)",
+                            outlineColor: "rgb(198, 109, 59)",
+                            startPlug: "behind",
+                            endPlug: "behind",
+                        }
+                    )
+                );
+            }
+            pre_pc_id = el.id;
+            pc_now_num++;
+        }
+        function pc_solve2(num) {
+            console.log(num);
+        }
+        //視覚的にわかりやすいpcを配置します
+        function place_pc(pc_w, num) {
+            let i_num = 0;
+            let pc_h = Math.floor(num / pc_w);
+            let pc_r = num % pc_w;
+            let i = 0,
+                i2 = 0;
+            //初期化
+            pc_max_num = num;
+            pc_now_num = 0;
+            pc_bord.innerHTML = "";
+            pc_xy_list = [];
+            if (0 < line_list.length) {
+                while (line_list.length) {
+                    line_list.pop().remove();
+                }
+            }
+            for (i = 0; i < pc_h; i++) {
+                output = document.createElement("div");
+                output.id = `pc_row_${i}`;
+                output.classList.add("d-flex", "justify-content-between");
+                pc_bord.appendChild(output);
+                let temp_el = document.getElementById(`pc_row_${i}`);
+                for (i2 = 0; i2 < pc_w; i2++) {
+                    output = document.createElement("div");
+                    output.id = `pc_temp_child_${i_num}`;
+                    output.classList.add("mass");
+                    pc_temp_list.push(`pc_temp_child_${i_num}`);
+                    ((data) => {
+                        output.addEventListener("click", () => {
+                            pc_solve1(data);
+                        });
+                    })(`pc_temp_child_${i_num}`);
+                    temp_el.appendChild(output);
+                    i_num++;
+                }
+            }
+        }
+    </script>
+</html>

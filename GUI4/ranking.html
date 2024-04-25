@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ランキングウィンドウ</title>
+        <style>
+            @font-face {
+                font-family: "otutome";
+                src: url("font/OtsutomeFont_Ver3_15.ttf");
+            }
+            .team {
+                min-height: 20vh;
+                /* border-radius: 1em; */
+                background-color: #bf9b77;
+                background-image: url("img/_6237d24c-c970-4a68-92cf-4995639e4a59.jpeg");
+                background-size: 100% 100%;
+                font-size: 4em;
+                color: azure;
+                margin: 2vh;
+                display: flex;
+                align-items: center;
+                font-family: "otutome";
+            }
+            body {
+                font-family: "otutome";
+            }
+        </style>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript" src="bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    </head>
+    <body
+        id="bord1"
+        style="background-image: url(img/23537053.jpg); background-size: cover"
+    >
+        <div class="container" id="master"></div>
+    </body>
+    <script>
+        let i = 0;
+        let ranking = [];
+        let bord = document.getElementById("bord1");
+        eel.expose(calc_team);
+        function calc_team(teamname, point) {
+            let element;
+            teamname = String(teamname);
+            function temp(teamname) {
+                for (ob in ranking) {
+                    console.log(ob);
+                    if (ranking[ob].teamname == teamname) {
+                        return false;
+                        console.log("1");
+                    }
+                }
+                console.log("2");
+                return true;
+            }
+            point = Number(point);
+            if (temp(teamname)) {
+                element = {
+                    teamname: teamname,
+                    point: point,
+                    prerank: -1,
+                    rank: -1,
+                };
+                ranking.push(element);
+            } else {
+                i = 0;
+                for (ob in ranking) {
+                    console.log(ob);
+                    if (ranking[ob].teamname == teamname) {
+                        ranking[i].point = point;
+                    }
+                    i++;
+                }
+            }
+            ranking.sort((a, b) => {
+                return a.point < b.point ? 1 : -1;
+            });
+            i = 0;
+            let i100 = 1;
+            let pre_point = 0;
+            let master_element = document.getElementById("master");
+            master_element.innerHTML = "";
+            for (ob in ranking) {
+                if (i != 0 && pre_point != ranking[ob].point) {
+                    i100++;
+                }
+                pre_point = ranking[ob].point;
+                console.log(ranking[i].point);
+                ranking[i].rank = i;
+                element = document.createElement("div");
+                element.classList.add("row", "team");
+                element_c = document.createElement("div");
+                element_c.classList.add("col-1");
+                element_c.innerHTML = `${i100}`;
+                element.appendChild(element_c);
+                element_c = document.createElement("div");
+                element_c.classList.add("col-7");
+                element_c.innerHTML = `${ranking[ob].teamname}海賊団`;
+                element.appendChild(element_c);
+                element_c = document.createElement("div");
+                element_c.classList.add("col");
+                element_c.innerHTML = `${`${ranking[ob].point}pt`}`;
+                element.appendChild(element_c);
+                master_element.appendChild(element);
+                i++;
+            }
+
+            // let output = document.createElement("div");
+            // output.classList.add("team");
+            // output.id = String(teamname);
+            // bord.appendChild(output);
+            // let el = document.getElementById(String(teamname));
+            // const keyframes = [
+            //     {
+            //         transform: `perspective(500px) translate3d(-5vw, 100vh, 300px)`,
+            //     },
+            //     { transform: `perspective(500px) translate3d(0, 0, 0px)` },
+            // ];
+            // //options（タイミングオプション）
+            // const timingOpts = {
+            //     duration: 2000,
+            //     easing: "ease-out",
+            //     fill: "both",
+            //     composite: "replace",
+            // };
+            // el.animate(keyframes, timingOpts);
+        }
+    </script>
+</html>
