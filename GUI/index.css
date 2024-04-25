@@ -1,0 +1,87 @@
+*{
+    margin : 0;
+    padding : 0;
+ }
+
+body {
+    background-color: #486d46;            /* 背景色 */
+    background-image: url("./images/Sugoroku.png"); /* 画像 */
+    background-size: cover;               /* 全画面 */
+    background-attachment: fixed;         /* 固定 */
+    background-position: center center;   /* 縦横中央 */
+}
+
+/*Video*/
+.video-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.anim {
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    -webkit-transform: translate(-50.25%, -50%);
+    -moz-transform: translate(-50.25%, -50%);
+    transform: translate(-50.25%, -50%);
+  }
+
+
+.boxBase {
+    transform-style: preserve-3d;
+    width: 200px;
+    height: 200px;
+}
+
+.boxBase>img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center center;   /* 縦横中央 */
+    /*background-color: rgba(100, 100, 100, 0.7);     /* 面の色 */
+    border: 0.5px solid black;  /* 縁 */
+}
+
+
+/*rotateXをθ度ずらしたときのfront,backのtranslateYの値=100sinθ*/
+.boxBase>.top {
+    transform: translateY(100px) rotateX(-98deg);
+}
+
+.boxBase>.bottom {
+    transform: translateY(-100px) rotateX(82deg);
+}
+
+.boxBase>.front {
+    transform: translateZ(100px) translateY(14px);
+}
+
+.boxBase>.back {
+    transform: translateZ(-100px) rotateX(180deg) translateY(14px);
+}
+
+.boxBase>.left {
+    transform: translateX(-100px) rotateY(-90deg) rotateZ(8deg);
+}
+
+.boxBase>.right {
+    transform: translateX(100px) rotateY(90deg) rotateZ(-8deg);
+}
+
+
+#scene {
+    perspective: 1000px;
+    width:200px;
+    height:200px;
+    position:relative;
+    top:50vh;
+    left:50vw;
+    transform:translateX(-50%) translateY(-50%) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}

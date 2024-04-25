@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>大航海すごろく</title>
+        <link rel="stylesheet" href="style.css" />
+        <script type="text/javascript" src="/eel.js"></script>
+    </head>
+    <body>
+        <img class="bkg_sky" src="./img/sky.png" />
+        <img class="bkg_land" src="./img/land.png" />
+        <img class="bkg_sea" src="./img/sea.png" />
+
+        <!--***************************************************************-->
+
+        <!-- 待機画面 -->
+        <nobr class="waiting_display" id="waiting_display">
+            他のチームが操作中です。<br />
+            少々お待ちください...
+        </nobr>
+
+        <!--***************************************************************-->
+
+        <!-- チーム追加 -->
+        <div id="m_inputbox">
+            <img src="./img/window.png" class="m_viewbox" />
+            <form
+                id="form_teamname"
+                action="#"
+                autocomplete="off"
+                onsubmit="return false;"
+            >
+                <input
+                    type="text"
+                    class="form_textbox"
+                    id="form_textbox_id"
+                    placeholder="チーム名を入力"
+                />
+            </form>
+            <button type="button" id="form_btn_id" class="form_btn_class">
+                決定
+            </button>
+        </div>
+
+        <!--***************************************************************-->
+
+        <!-- ステータスを表示 -->
+        <nobr class="state_name" id="state_name">○○○○ 海賊団</nobr>
+        <img class="name_ship" src="./img/ship.png" />
+        <p class="state_point" id="state_point">0 pt</p>
+        <img class="point_coin" src="./img/coin_logo.png" />
+
+        <!--***************************************************************-->
+
+        <!-- 今何マス目かを表示 -->
+        <img class="grid_sign_board" src="./img/masu_kanban.png" />
+        <div class="grid">
+            <p class="grid_num" id="grid_num">-1</p>
+            <p class="grid_masume" id="grid_data">マス目</p>
+        </div>
+
+        <!--***************************************************************-->
+
+        <!-- 現在のタスクの残り時間を表示 -->
+        <img class="time_sign_board" src="./img/kanban3.png" />
+        <div class="time">
+            <p class="time_left">残り</p>
+            <p class="time_num" id="time_num">0</p>
+            <p class="time_sec">秒</p>
+        </div>
+
+        <!--***************************************************************-->
+
+        <!-- ダイスを振る -->
+        <section class="diceContent" id="id_diceContent">
+            <!--
+        <div id="scene">
+          <div class="boxBase" id="id_boxBase">
+            <div class="bottom" id="dice_bottom">
+                <div class="dice_num" id="id_dicenum_b">1</div>
+            </div>
+            <div class="front" id="dice_front">
+                <div class="dice_num" id="id_dicenum_f">1</div>
+            </div>
+          </div>
+        </div>
+        --></section>
+        <div class="video-box">
+            <!--<video preload="auto" class="anim" id="anim_1" muted poster="./images/anim_1.png">
+                <source src="./anim/anim_1.webm" type="video/webm">
+                <source src="./anim/anim_1_1.webm" type="video/webm">
+            </video>
+            <video preload="auto" class="anim" id="anim_2" muted poster="./images/anim_2.png">
+                <source src="./anim/anim_2.webm" type="video/webm">
+                <source src="./anim/anim_2_1.webm" type="video/webm">
+            </video>
+            <video preload="auto" class="anim" id="anim_3" muted poster="./images/anim_3.png">
+                <source src="./anim/anim_3.webm" type="video/webm">
+                <source src="./anim/anim_3_1.webm" type="video/webm">
+            </video>
+            <video preload="auto" class="anim" id="anim_4" muted poster="./images/anim_4.png">
+                <source src="./anim/anim_4.webm" type="video/webm">
+                <source src="./anim/anim_4_1.webm" type="video/webm">
+            </video>
+            <video preload="auto" class="anim" id="anim_5" muted poster="./images/anim_5.png">
+                <source src="./anim/anim_5.webm" type="video/webm">
+                <source src="./anim/anim_5_1.webm" type="video/webm">
+            </video>
+            <video preload="auto" class="anim" id="anim_6" muted poster="./images/anim_6.png">
+                <source src="./anim/anim_6.webm" type="video/webm">
+                <source src="./anim/anim_6_1.webm" type="video/webm">
+            </video>
+            <video preload="auto" class="anim" id="anim_7" muted poster="./images/anim_7.png">
+                <source src="./anim/anim_7.webm" type="video/webm">
+                <source src="./anim/anim_7_1.webm" type="video/webm">
+            </video>
+            <video preload="auto" class="anim" id="anim_8" muted poster="./images/anim_8.png">
+                <source src="./anim/anim_8.webm" type="video/webm">
+                <source src="./anim/anim_8_1.webm" type="video/webm">
+            </video>
+            <video preload="auto" class="anim" id="anim_9" muted poster="./images/anim_9.png">
+                <source src="./anim/anim_9.webm" type="video/webm">
+                <source src="./anim/anim_9_1.webm" type="video/webm">
+            </video>
+            <video preload="auto" class="anim" id="anim_10" muted poster="./images/anim_10.png">
+                <source src="./anim/anim_10.webm" type="video/webm">
+                <source src="./anim/anim_10_1.webm" type="video/webm">
+            </video>-->
+            <img class="anim" id="anim_1" src="anim/anim_1.gif" />
+            <img class="anim" id="anim_2" src="anim/anim_2.gif" />
+            <img class="anim" id="anim_3" src="anim/anim_3.gif" />
+            <img class="anim" id="anim_4" src="anim/anim_4.gif" />
+            <img class="anim" id="anim_5" src="anim/anim_5.gif" />
+            <img class="anim" id="anim_6" src="anim/anim_6.gif" />
+            <img class="anim" id="anim_7" src="anim/anim_7.gif" />
+            <img class="anim" id="anim_8" src="anim/anim_8.gif" />
+            <img class="anim" id="anim_9" src="anim/anim_9.gif" />
+            <img class="anim" id="anim_10" src="anim/anim_10.gif" />
+        </div>
+
+        <!--***************************************************************-->
+
+        <!--イベントを実行-->
+        <img class="event_paper" id="event_paper" src="./img/paper.png" />
+
+        <!--***************-->
+
+        <!-- トーク -->
+        <div class="event_talk" id="event_talk">
+            <p class="talk_theme" id="talk_theme">自分の趣味は？</p>
+            <img
+                class="talk_img"
+                id="talk_img"
+                src="./img/event/australia.png"
+            />
+            <p class="talk_description">
+                チームの皆と話し合おう!!<br />
+                ３人以上話せたら下のボタンを押してね!!
+            </p>
+            <input
+                type="button"
+                class="talk_btn"
+                id="talk_btn"
+                value="できた!!"
+            />
+        </div>
+
+        <!--***************-->
+
+        <!-- チョイス -->
+        <div class="event_choice" id="event_choice">
+            <p class="choice_theme" id="choice_theme">
+                この中でかっこいい先生は？
+            </p>
+            <div class="choice_imgs">
+                <img
+                    class="choice_img1"
+                    id="choice_img1"
+                    src="./img/bird.png"
+                />
+                <img
+                    class="choice_img2"
+                    id="choice_img2"
+                    src="./img/bird.png"
+                />
+                <img
+                    class="choice_img3"
+                    id="choice_img3"
+                    src="./img/bird.png"
+                />
+                <img
+                    class="choice_img4"
+                    id="choice_img4"
+                    src="./img/bird.png"
+                />
+            </div>
+            <p class="choice_description">
+                チームの皆と話し合おう!!<br />
+                ３人以上話せたら下のボタンを押してね!!
+            </p>
+            <input
+                type="button"
+                class="choice_btn"
+                id="choice_btn"
+                value="できた!!"
+            />
+        </div>
+
+        <!--***************-->
+
+        <!-- クイズ1 -->
+        <div class="event_quiz1" id="event_quiz1">
+            <p class="quiz1_question" id="quiz1_question">
+                "！"の正しい名称はどれ？
+            </p>
+            <img
+                class="quiz1_img"
+                id="quiz1_img"
+                src="./img/event/exclamation.png"
+            />
+            <div class="quiz1_anss" id="quiz1_anss">
+                <input
+                    type="button"
+                    class="quiz1_ans1"
+                    id="quiz1_ans1"
+                    value="ハプニングマーク"
+                />
+                <input
+                    type="button"
+                    class="quiz1_ans2"
+                    id="quiz1_ans2"
+                    value="ハプニングマーク"
+                />
+                <input
+                    type="button"
+                    class="quiz1_ans3"
+                    id="quiz1_ans3"
+                    value="ハプニングマーク"
+                />
+                <input
+                    type="button"
+                    class="quiz1_ans4"
+                    id="quiz1_ans4"
+                    value="ハプニングマーク"
+                />
+            </div>
+        </div>
+
+        <!--***************-->
+
+        <!-- クイズ2 -->
+        <div class="event_quiz2" id="event_quiz2">
+            <p class="quiz2_question" id="quiz2_question">
+                正しいwindowsマークはどれ？
+            </p>
+            <div class="quiz2_anss" id="quiz2_anss">
+                <img
+                    class="quiz2_ans1"
+                    id="quiz2_ans1"
+                    src="./img/event/windows.png"
+                />
+                <img
+                    class="quiz2_ans2"
+                    id="quiz2_ans2"
+                    src="./img/event/windows.png"
+                />
+                <img
+                    class="quiz2_ans3"
+                    id="quiz2_ans3"
+                    src="./img/event/windows.png"
+                />
+                <img
+                    class="quiz2_ans4"
+                    id="quiz2_ans4"
+                    src="./img/event/windows.png"
+                />
+            </div>
+        </div>
+
+        <!--***************-->
+
+        <!-- 神経衰弱 -->
+        <div class="event_game1" id="event_game1">
+            <img class="game1_board_img" src="./img/event/game_board.png" />
+            <p class="game1_theme" id="game1_theme">神経衰弱！</p>
+            <p class="game1_description" id="game1_description">
+                同じ絵柄のカードの組みを作ろう！
+            </p>
+            <div class="game1_board">
+                <!-- この中に書く！ -->
+                <div class="game1_line1">
+                    <img
+                        class="game1_card1"
+                        id="game1_card1"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card2"
+                        id="game1_card2"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card3"
+                        id="game1_card3"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card4"
+                        id="game1_card4"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card5"
+                        id="game1_card5"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card6"
+                        id="game1_card6"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                </div>
+                <div class="game1_line2">
+                    <img
+                        class="game1_card7"
+                        id="game1_card7"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card8"
+                        id="game1_card8"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card9"
+                        id="game1_card9"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card10"
+                        id="game1_card10"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card11"
+                        id="game1_card11"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                    <img
+                        class="game1_card12"
+                        id="game1_card12"
+                        src="./img/event/cards/trump_b.png"
+                    />
+                </div>
+                <p class="complete_msg" id="complete_msg">コンプリート!!</p>
+            </div>
+        </div>
+
+        <!--***************-->
+
+        <!-- ジェスチャーゲーム -->
+        <div class="event_game2" id="event_game2">
+            <img class="game2_board_img" src="./img/event/game_board.png" />
+            <p class="game2_theme" id="game2_theme">ジェスチャーゲーム！</p>
+            <p class="game2_description" id="game2_description">
+                言葉を使わずに、動きだけで表現しよう！
+            </p>
+            <div class="game2_board">
+                <p class="game2_rule_title">《 ルール 》</p>
+                <div class="game2_rules">
+                    <p class="game2_rule1" id="game2_rule1">
+                        １. 出題役を１人決めてください
+                    </p>
+                    <p class="game2_rule2" id="game2_rule2">
+                        ２. それ以外の人は後ろを向いてください
+                    </p>
+                    <p class="game2_rule3" id="game2_rule3">
+                        ３. 準備ができたらボタンを押してください
+                    </p>
+                </div>
+                <input
+                    class="game2_look_btn"
+                    id="game2_look_btn"
+                    type="button"
+                    value="お題を見る"
+                />
+                <div
+                    class="game2_gesture_theme_div"
+                    id="game2_gesture_theme_div"
+                >
+                    <img class="game2_sketch" src="./img/event/sketch.png" />
+                    <p class="game2_theme_is">お題は...</p>
+                    <p class="game2_gesture_theme">背泳ぎ</p>
+                </div>
+            </div>
+        </div>
+
+        <!--***************-->
+
+        <!-- ブラックジャック -->
+        <div class="event_game3" id="event_game3">
+            <img class="game3_board_img" src="./img/event/game_board.png" />
+            <p class="game3_theme" id="game3_theme">ブラックジャック</p>
+            <p class="game3_description" id="game3_description">
+                21を越えないように、できるだけ21に近づけよう！
+                ※１～５までしか出ません
+            </p>
+            <div class="game3_board">
+                <!-- この中に書く！ -->
+                <img
+                    class="card_deck"
+                    id="card_deck"
+                    src="./img/event/cards/trump_b.png"
+                />
+                <img
+                    class="open_card"
+                    id="open_card"
+                    src="./img/event/cards/trump_s1.png"
+                />
+                <p class="card_sum" id="card_sum">合計値</p>
+                <p class="card_num_sum" id="card_num_sum">0</p>
+                <input
+                    class="open_card_btn"
+                    id="open_card_btn"
+                    type="button"
+                    value="ヒット"
+                />
+                <img
+                    class="move_card"
+                    id="move_card"
+                    src="./img/event/cards/trump_b.png"
+                />
+            </div>
+        </div>
+
+        <!--***************************************************************-->
+
+        <img class="start_flag" id="start_flag" src="./img/start_flag.png" />
+        <img class="timeup_flag" id="timeup_flag" src="./img/timeup_flag.png" />
+
+        <!--***************************************************************-->
+
+        <!-- 船を進行 -->
+        <img class="ship" id="ship" src="./img/ship.png" />
+
+        <!--***************************************************************-->
+
+        <!-- 宝箱のアニメーション -->
+        <div class="video-box" id="video-box">
+            <video
+                preload="auto"
+                class="anim"
+                id="tresurebox_anim"
+                src="./anim/treasure_boxv7.webm"
+                muted
+            ></video>
+        </div>
+
+        <!--***************-->
+
+        <!-- リザルトを表示する -->
+        <img class="result_paper" id="result_paper" src="./img/page.png" />
+        <div class="result" id="result">
+            <img class="result_coins" id="result_coins" src="./img/coins.png" />
+            <p class="result_title">result</p>
+            <p class="result_clear" id="result_clear">不正解！</p>
+            <p class="result_answer" id="result_answer"></p>
+            <p class="result_description" id="result_description"></p>
+            <p class="result_normal_point" id="result_normal_point">
+                　　通常点：100pt
+            </p>
+            <p class="result_bonus_point" id="result_bonus_point">
+                ボーナス点：300pt
+            </p>
+            <p class="result_turn_point" id="result_turn_point">
+                　総合得点：400pt
+            </p>
+        </div>
+
+        <!--***************************************************************-->
+
+        <!-- エンディングムービを再生 -->
+        <div class="end_result" id="end_result">
+            <div class="end_video_box">
+                <!--<img src="./images/test.png"/>-->
+                <video
+                    preload="auto"
+                    class="ending"
+                    id="ending"
+                    src="./anim/result_v2.mp4"
+                    poster="./img/empty.jpg"
+                ></video>
+            </div>
+            <p id="end_teamname">チーム名</p>
+            <p id="end_subtotal">得点:1000点</p>
+            <p id="end_bonus">ボーナス:+100点</p>
+            <p id="end_total">総合得点:1100点</p>
+            <img src="./img/empty.jpg" id="end_fade" />
+        </div>
+
+        <!--***************************************************************-->
+
+        <script src="main.js"></script>
+    </body>
+</html>

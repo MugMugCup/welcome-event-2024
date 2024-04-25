@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <script type="text/javascript" src="/eel.js"></script>
+        <title>作成中</title>
+        <link rel="stylesheet" href="dicev2.css" />
+    </head>
+    <body onload="dicedel()">
+        <section class="diceContent" id="id_diceContent">
+            <div id="scene">
+                <div class="boxBase" id="id_boxBase">
+                    <div class="bottom" id="dice_bottom">
+                        <div class="dice_num" id="id_dicenum_b">1</div>
+                    </div>
+                    <div class="front" id="dice_front">
+                        <div class="dice_num" id="id_dicenum_f">1</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="video-box">
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_1"
+                src="./anim/anim_1.webm"
+                muted
+            ></video>
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_2"
+                src="./anim/anim_2.webm"
+                muted
+            ></video>
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_3"
+                src="./anim/anim_3.webm"
+                muted
+            ></video>
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_4"
+                src="./anim/anim_4.webm"
+                muted
+            ></video>
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_5"
+                src="./anim/anim_5.webm"
+                muted
+            ></video>
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_6"
+                src="./anim/anim_6.webm"
+                muted
+            ></video>
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_7"
+                src="./anim/anim_7.webm"
+                muted
+            ></video>
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_8"
+                src="./anim/anim_8.webm"
+                muted
+            ></video>
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_9"
+                src="./anim/anim_9.webm"
+                muted
+            ></video>
+            <video
+                preload="auto"
+                class="anim"
+                id="anim_10"
+                src="./anim/anim_10.webm"
+                muted
+            ></video>
+        </div>
+    </body>
+    <script
+        type="text/javascript"
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+    ></script>
+    <script type="text/javascript" src="dicev2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function requestFullscreen(elem) {
+            // 全画面表示をリクエストするメソッドを取得
+            const method =
+                elem.requestFullscreen ||
+                elem.webkitRequestFullscreen ||
+                elem.mozRequestFullScreen ||
+                elem.msRequestFullscreen;
+            if (method) {
+                method.call(elem); // 全画面表示をリクエスト
+            }
+        }
+
+        var dise_statu_c = false;
+        eel.expose(start_dise);
+        function start_dise() {
+            dise_statu_c = true;
+            diceprint();
+        }
+
+        function openFullscreen() {
+            const elem = document.documentElement;
+            requestFullscreen(elem);
+        }
+    </script>
+</html>

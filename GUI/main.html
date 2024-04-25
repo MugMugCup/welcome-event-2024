@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript" src="bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="img/360_F_535915275_bzBLtYUmIIofc9LMA2vlip2ETfiYCjX.png"
+        />
+        <title>新入生歓迎会イベントクライアント</title>
+        <style>
+            .sssm {
+                margin: 0;
+                height: 20px;
+            }
+            .zumi {
+                background-color: coral;
+            }
+            .prepara {
+                background-color: tan;
+            }
+            .orange {
+                background-color: orange;
+            }
+            .ip {
+                background-color: aquamarine;
+                border-radius: 0.2vh;
+                padding: 2vh;
+                font-size: 4vh;
+                width: auto;
+                text-align: center;
+                margin: 1vh;
+            }
+            .log {
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body id="mainbord">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 vh-100">
+                    <div
+                        class="row bg-light"
+                        style="
+                            height: 50vh;
+                            margin: 3vh;
+                            border-radius: 5vh;
+                            text-align: center;
+                        "
+                    >
+                        <div class="row">
+                            <div style="float: left">
+                                <button
+                                    class="btn-success btn"
+                                    type="button"
+                                    id="sousin"
+                                >
+                                    送信データ
+                                </button>
+                                <input
+                                    type="text"
+                                    id="sousin_text"
+                                    value=""
+                                /><br />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button
+                                class="btn btn-dark disabled"
+                                id="index_set"
+                            >
+                                index付与
+                            </button>
+                        </div>
+                        <div class="row">
+                            <input
+                                type="text"
+                                id="index_text"
+                                value=""
+                                disabled
+                                style="width: 100%; height: 8vh"
+                            />
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40vh; position: relative">
+                        <div
+                            style="
+                                font-size: 7vh;
+                                border-radius: 5vh;
+                                height: 30vh;
+                                width: 45vw;
+                                margin: 0;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                margin-right: -50%;
+                                transform: translate(-50%, -50%);
+                            "
+                            class="prepara"
+                            id="ic_back"
+                        >
+                            <p
+                                id="ic_statu"
+                                style="
+                                    margin: 0;
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 50%;
+                                    margin-right: -50%;
+                                    transform: translate(-50%, -50%);
+                                "
+                            >
+                                準備中
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6" style="text-align: center">
+                    <h1>LOG</h1>
+                    <div
+                        class="row bg-light"
+                        style="
+                            height: 80vh;
+                            border-width: 5px;
+                            border-radius: 3vh;
+                            width: 100%;
+                            overflow: scroll;
+                            text-align: left;
+                            padding: 3vh;
+                        "
+                        id="textb"
+                    ></div>
+                </div>
+            </div>
+            <div class="row bg-light">
+                <div class="col"></div>
+            </div>
+        </div>
+        <!-- Button trigger modal -->
+        <div class="row">
+            <div class="col-8">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    style="z-index: 100"
+                >
+                    setting ＆ other
+                </button>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            Main Menu
+                        </h1>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <button
+                                    class="btn-dark btn"
+                                    type="button"
+                                    id="ic_start"
+                                    data-bs-dismiss="modal"
+                                >
+                                    クライアント開始
+                                </button>
+                            </div>
+                            <div class="col">
+                                <button
+                                    class="btn-light btn"
+                                    type="button"
+                                    id="ic_stop"
+                                    data-bs-dismiss="modal"
+                                >
+                                    クライアント停止
+                                </button>
+                            </div>
+                            <div class="col">
+                                <div style="float: left">
+                                    <button
+                                        class="btn-success btn"
+                                        type="button"
+                                        id="ic_inport"
+                                    >
+                                        サーバーip
+                                    </button>
+                                    <input
+                                        type="text"
+                                        id="ic_text"
+                                        value=""
+                                    /><br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <!-- メッセージダイアログ -->
+            <div
+                class="modal fade"
+                id="mes_Modal"
+                tabindex="-1"
+                aria-labelledby="mes_ModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mes_ModalLabel">
+                                temp
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body" id="mes_Modal_val">temp</div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let index_set_bool = true;
+            eel.expose(logprint);
+            function logprint(text) {
+                output = document.createElement("div");
+                output.innerHTML = text;
+                document.getElementById("textb").appendChild(output);
+                scroll_bottom();
+            }
+            eel.expose(set_index);
+            function set_index(index) {
+                document.getElementById("index_text").value =
+                    "index" + String(index);
+            }
+
+            function scroll_bottom() {
+                document.getElementById("textb").scrollTop =
+                    document.getElementById("textb").scrollHeight;
+            }
+            const setting_Modal = new bootstrap.Modal(
+                document.getElementById("exampleModal")
+            );
+            document
+                .getElementById("index_set")
+                .addEventListener("click", () => {
+                    document
+                        .getElementById("index_set")
+                        .classList.add("disabled");
+                    eel.append_send_data(":100:");
+                    index_set_bool = true;
+                });
+
+            eel.expose(index_set_ready);
+            function index_set_ready() {
+                document
+                    .getElementById("index_set")
+                    .classList.remove("disabled");
+                index_set_bool = false;
+            }
+            // let main_statu = false;
+            // let setting_modar = true;
+            // let taiki = "カードをタッチ";
+            // document.getElementById("newwin").addEventListener("click", () => {
+            //     eel.new_window();
+            // });
+            document
+                .getElementById("mainbord")
+                .addEventListener("keydown", () => {
+                    if (event.code == "Space" && index_set_bool == false) {
+                        eel.append_send_data(":100:");
+                        index_set_bool = true;
+                        document
+                            .getElementById("index_set")
+                            .classList.add("disabled");
+                    }
+                    if (event.shiftKey && event.code == "KeyS") {
+                        setting_Modal.toggle();
+                    }
+                    if (event.shiftKey && event.code == "Digit1") {
+                        ic_ss();
+                        setting_Modal.hide();
+                    }
+                    if (event.shiftKey && event.code == "Digit2") {
+                        eel.stop();
+                        setting_Modal.hide();
+                    }
+                    if (event.shiftKey && event.code == "Digit3") {
+                        eel.new_window();
+                        setting_Modal.hide();
+                    }
+                });
+            // async function set_up() {
+            //     let hoge = await eel.get_ip()();
+            //     document.getElementById("ip_setting").innerHTML = "";
+            //     let i = 0;
+            //     for (hogehoge of hoge) {
+            //         (function (i1, hoge2) {
+            //             output = document.createElement("div");
+            //             output.innerHTML = hoge2;
+            //             output.setAttribute("id", "ip_" + String(i));
+            //             output.classList.add("ip");
+            //             output.classList.add("col");
+            //             document
+            //                 .getElementById("ip_setting")
+            //                 .appendChild(output);
+            //             document
+            //                 .getElementById("ip_" + String(i))
+            //                 .addEventListener("click", function () {
+            //                     eel.set_ip_num(i1);
+            //                 });
+            //         })(i, hogehoge);
+            //         i = i + 1;
+            //     }
+            // }
+            // document
+            //     .getElementById("mainbord")
+            //     .addEventListener("keyup", () => {
+            //         if (event.code == "ShiftLeft" && main_statu) {
+            //             eel.st_exit(0);
+            //             taiki = "カードをタッチ";
+            //             document.getElementById("ic_statu").innerHTML =
+            //                 "カードをタッチ";
+            //         }
+            //     });
+            // const mes_Modal = new bootstrap.Modal(
+            //     document.getElementById("mes_Modal")
+            // );
+            // function scroll_bottom() {
+            //     document.getElementById("kitahito").scrollTop =
+            //         document.getElementById("kitahito").scrollHeight;
+            // }
+            // function scroll_bottom2() {
+            //     document.getElementById("kitenaihito").scrollTop =
+            //         document.getElementById("kitenaihito").scrollHeight;
+            // }
+            document
+                .getElementById("ic_start")
+                .addEventListener("click", () => {
+                    ic_ss();
+                });
+            function ic_ss() {
+                eel.start();
+                console.log("OK");
+            }
+            document.getElementById("ic_stop").addEventListener("click", () => {
+                eel.stop();
+                console.log("OK2");
+            });
+            document
+                .getElementById("ic_inport")
+                .addEventListener("click", () => {
+                    eel.select_HOST(document.getElementById("ic_text").value);
+                });
+            document.getElementById("sousin").addEventListener("click", () => {
+                eel.append_send_data(
+                    document.getElementById("sousin_text").value
+                );
+            });
+            // const sleep = (waitTime) =>
+            //     new Promise((resolve) => setTimeout(resolve, waitTime));
+            // document
+            //     .getElementById("add_st_id")
+            //     .addEventListener("click", () => {
+            //         eel.add_data(
+            //             document.getElementById("add_st_id_val").value
+            //         );
+            //     });
+            // document
+            //     .getElementById("delete_st_id")
+            //     .addEventListener("click", () => {
+            //         eel.delete_data(
+            //             document.getElementById("delete_st_id_val").value
+            //         );
+            //     });
+            // document
+            //     .getElementById("manu_id_btn")
+            //     .addEventListener("click", () => {
+            //         eel.manu_suc(document.getElementById("st_id_manu").value);
+            //     });
+
+            // eel.expose(mes_show);
+            // function mes_show(lab, mes) {
+            //     document.getElementById("mes_Modal_val").innerHTML = mes;
+            //     document.getElementById("mes_ModalLabel").innerHTML = lab;
+            //     mes_Modal.show();
+            // }
+
+            // eel.expose(setup);
+            // function setup(list) {
+            //     console.log(list);
+            // }
+            // eel.expose(ic_output);
+            // function ic_output(a, b, c) {
+            //     console.log(a);
+            //     console.log(b);
+            //     ic_output2(a, b, c);
+            // }
+
+            // eel.expose(prepare);
+            // function prepare() {
+            //     main_statu = false;
+            //     document.getElementById("ic_statu").innerHTML = "準備中";
+            //     document.getElementById("ic_back").classList.add("prepare");
+            // }
+
+            // eel.expose(hanei);
+            // function hanei(a, b) {
+            //     main_statu = true;
+            //     console.log(a);
+            //     console.log(b);
+            //     document.getElementById("kitahito").innerHTML = "";
+            //     for (let i = 0; i < a.length; i++) {
+            //         output = document.createElement("div");
+            //         output.innerHTML = a[i];
+            //         output.classList.add("sssm");
+            //         document.getElementById("kitahito").appendChild(output);
+            //         scroll_bottom();
+            //     }
+            //     document.getElementById("kitenaihito").innerHTML = "";
+            //     for (let i = 0; i < b.length; i++) {
+            //         output = document.createElement("div");
+            //         output.innerHTML = b[i];
+            //         output.classList.add("sssm");
+            //         document.getElementById("kitenaihito").appendChild(output);
+            //         scroll_bottom2();
+            //     }
+            // }
+
+            // let ok = 1;
+            // async function ic_output2(i_st_id, i_st_name, ad = -1) {
+            //     if (ok == 0) {
+            //         return;
+            //     }
+            //     ok = 0;
+            //     console.log(ad);
+            //     console.log(i_st_id);
+            //     console.log(i_st_name);
+            //     document.getElementById("st_id").innerHTML = i_st_id;
+            //     document.getElementById("st_name").innerHTML = i_st_name;
+            //     document
+            //         .getElementById("ic_back")
+            //         .classList.remove(
+            //             ...document.getElementById("ic_back").classList
+            //         );
+            //     if (ad == 1) {
+            //         document.getElementById("ic_statu").innerHTML = "認証成功";
+            //         document
+            //             .getElementById("ic_back")
+            //             .classList.add("bg-success");
+            //     } else if (ad == 2) {
+            //         document.getElementById("ic_statu").innerHTML = "重複認証";
+            //         document.getElementById("ic_back").classList.add("zumi");
+            //     } else if (ad == 3) {
+            //         prepare();
+            //         return;
+            //     } else {
+            //         document.getElementById("ic_statu").innerHTML = "認証不可";
+            //         document
+            //             .getElementById("ic_back")
+            //             .classList.add("bg-danger");
+            //     }
+            //     await sleep(1500);
+            //     document.getElementById("st_id").innerHTML = "   ";
+            //     document.getElementById("st_name").innerHTML = "   ";
+            //     document.getElementById("ic_statu").innerHTML = taiki;
+            //     document
+            //         .getElementById("ic_back")
+            //         .classList.remove(
+            //             ...document.getElementById("ic_back").classList
+            //         );
+            //     document.getElementById("ic_back").classList.add("bg-primary");
+            //     ok = 1;
+            //     if (i_st_id == "処理停止") {
+            //         prepare();
+            //     }
+            // }
+            // set_up();
+
+            //待機画面を表示させる関数(ユーザーが来たときのみ)
+            function display_wait_page() {}
+            //待機を解除する関数
+            function display_start() {}
+            //サーバーからの指示でさいころを振る関数
+            eel.expose(client_dice_roll);
+            function client_roll_dice(teamname) {
+                display_start();
+                let _dice; //さいころの出目
+
+                display_wait_page();
+                return teamname, _dice;
+            }
+
+            //サーバからの指示でゲームを開始する関数
+            eel.expose(client_start_game);
+            function client_start_game(teamname) {
+                display_start();
+                let _point;
+
+                display_wait_page();
+                return taamname, _point;
+            }
+
+            //サーバーからの指示で画面の表示を更新する関数
+            function client_updata_display(teamname, point) {}
+
+            //サーバからの指示で何も表示させない関数&画面の表示を消す関数(ユーザもいないときの待機画面)
+            eel.expose(client_clean_display);
+            function client_clean_display() {}
+        </script>
+    </body>
+</html>

@@ -1,0 +1,6 @@
+<root>
+    <s_ip>localhost</s_ip>
+    <s_port>20001</s_port>
+    <r_ip>localhost</r_ip>
+    <r_port>21000</r_port>
+</root>

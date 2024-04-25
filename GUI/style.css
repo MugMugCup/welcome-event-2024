@@ -1,0 +1,1139 @@
+@font-face{
+    font-family: "otutome";
+    src: url("./font/OtsutomeFont_Ver3_15.ttf");
+}
+
+@font-face{
+    font-family: "源ノ明朝 Heavy";
+    src: url("./font/SOURCEHANSERIF-HEAVY.OTF");
+}
+
+@font-face{
+    font-family: "玉ねぎ楷書激無料版V7改";
+    src: url("./font/玉ねぎ楷書激無料版V7改.TTF");
+}
+
+@font-face{
+    font-family: "ラノベPOP v2";
+    src: url("./font/LightNovelPOPv2.otf");
+}
+
+
+*{
+    position: absolute;
+    margin: 0;
+}
+
+body{
+    font-family: "otutome";
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.bkg_sky{
+    width: 100vw;
+    z-index: -3;
+}
+
+.bkg_sea{
+    width: 100vw;
+}
+
+.bkg_land{
+    left: 48vw;
+    top: 8vw;
+    width: 40vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    z-index: -2;
+}
+
+/*-------------------------------------------------------------------------*/
+
+/* チーム名登録 */
+.m_viewbox{
+    top: 0;
+    left: 0;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.form_textbox{
+    left: 48.5vw;
+    top: 22.5vw;
+    width:60vw;
+    height:11vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    font-family: "玉ねぎ楷書激無料版V7改";
+    font-size:8vw;
+}
+
+.form_btn_class{
+    left: 48.5vw;
+    top: 35vw;
+    width:30vw;
+    height:10vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    font-family: "玉ねぎ楷書激無料版V7改";
+    font-size:7vw;
+    background-color: burlywood;
+}
+
+.form_btn_class:hover{
+	opacity: 0.5;
+}
+
+#m_inputbox{
+    visibility: hidden;
+}
+
+/*-------------------------------------------------------------------------*/
+
+.waiting_display{
+    left: 50vw;
+    top: 25.5vw;
+    padding: 2.3vw 2vw 1.7vw 2vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    line-height: 2.5vw;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 1vw;
+    color: white;
+    font-size: 2vw;
+    visibility: hidden;
+}
+
+/*-------------------------------------------------------------------------*/
+
+.state_name{
+    left: 1vw;
+    top: 1vw;
+    padding: 1.2vw 1.5vw 0.7vw 6vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 1vw;
+    color: white;
+    font-size: 2vw;
+}
+
+.name_ship{
+    left: 1vw;
+    top: 0.5vw;
+    width: 4.6vw;
+}
+
+.state_point{
+    left: 1vw;
+    top: 6vw;
+    padding: 1.2vw 1.5vw 0.7vw 6vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 1vw;
+    color: white;
+    font-size: 2vw;
+}
+
+.point_coin{
+    left: 0.6vw;
+    top: 5.9vw;
+    width: 5.7vw;
+}
+
+/*-------------------------------------------------------------------------*/
+
+/* マス目表示 */
+.grid_sign_board{
+    left: 50vw;
+    top: 23vw;
+    width: 20vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    z-index: -2;
+}
+
+.grid{
+    position: relative;
+    left: 42vw;
+    top: 25vw;
+    color: white;
+    z-index: -2;
+}
+
+.grid_num{
+    left: 4.5vw;
+    top: 2.8vw;
+    font-size: 6vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+.grid_masume{
+    left: 9vw;
+    top: 6vw;
+    width: 10vw;
+    font-size: 2vw;
+}
+
+/*-------------------------------------------------------------------------*/
+
+/* 時間制限表示 */
+.time_sign_board{
+    left: 90vw;
+    top: -5vw;
+    width: 18vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    z-index: 7;
+}
+
+.time{
+    position: relative;
+    left: 83vw;
+    top: 3vw;
+    color: black;
+    z-index: 8;
+}
+
+.time_left{
+    left: 0vw;
+    top: 3.8vw;
+    width: 4vw;
+    font-size: 2vw;
+}
+
+.time_num{
+    left: 7.5vw;
+    top: 1.3vw;
+    font-size: 5vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+.time_sec{
+    left: 11.5vw;
+    top: 3.8vw;
+    font-size: 2vw;
+}
+
+/*-------------------------------------------------------------------------*/
+
+/* サイコロ関係 */:root{
+    --dice_size: 9.6vw;  /*ここの値をいじるとサイコロの大きさを変えられる(デフォルトは9.6vw)*/
+    --dice_size: 15vw;
+
+    /*--dice_sizeから値を色々計算*/
+    --box_size:calc(var(--dice_size)/2);
+    --box_size_m:calc(var(--box_size)*-1);
+    --box_size_y:calc(var(--dice_size)/14.28);
+    --box_fontsize:calc(var(--dice_size)/1.273);
+    --box_perspective:calc(var(--dice_size)*5);
+    --video_box_width:calc(var(--dice_size)/0.096);
+    --video_box_height:calc(var(--video_box_width)*(9/16));
+}
+
+.please_space{
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    white-space: nowrap;
+    left:8vw;
+    top:25vw;
+    font-size:5vw;
+    color:white;
+    -webkit-text-stroke:0.15vw #000;
+}
+
+
+/* サイコロ関係 */
+.video-box {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 56.25vw; /*ちょうど16:9*/
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.anim {
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    -webkit-transform: translate(-50.25%, -50%);
+    -moz-transform: translate(-50.25%, -50%);
+    transform: translate(-50.25%, -50%);
+  }
+
+
+.boxBase {
+    transform-style: preserve-3d;
+    width: var(--dice_size);
+    height: var(--dice_size);
+}
+
+#dice_bottom{
+    background-color: #ffd200;     /* 面の色 */
+}
+
+#dice_front{
+    background-color: #ffd200;     /* 面の色 */
+}
+
+.boxBase>div{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /*background-position: center center;   /* 縦横中央 */
+    border: 0.01vw solid black;  /* 縁 */
+}
+
+.dice_num {
+    display:inline-block;
+    position:relative;
+    left:50%;
+    top:50%;
+    font-family: "源ノ明朝 Heavy";
+    font-size:var(--box_fontsize);
+    color:#FFFFFF;
+    transform:translate(-50%,-50%);
+}
+
+
+/*rotateXをθ度ずらしたときのfront,backのtranslateYの値=100sinθ*/
+.boxBase>.top {
+    transform: translateY(var(--box_size)) rotateX(-98deg);
+}
+
+.boxBase>.bottom {
+    transform: translateY(var(--box_size_m)) rotateX(82deg);
+}
+
+.boxBase>.front {
+    transform: translateZ(var(--box_size)) translateY(var(--box_size_y));
+}
+
+.boxBase>.back {
+    transform: translateZ(var(--box_size_m)) rotateX(180deg) translateY(var(--box_size_yf));
+}
+
+.boxBase>.left {
+    transform: translateX(var(--box_size_m)) rotateY(-90deg) rotateZ(8deg);
+}
+
+.boxBase>.right {
+    transform: translateX(var(--box_size)) rotateY(90deg) rotateZ(-8deg);
+}
+
+
+#scene {
+    perspective: var(--box_perspective);
+    width:var(--dice_size);
+    height:var(--dice_size);
+    position:relative;
+    top:28.125vw;
+    left:50vw;
+    transform:translateX(-50%) translateY(-50%) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+#anim_1{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+#anim_2{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+#anim_3{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+#anim_4{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+#anim_5{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+#anim_6{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+#anim_7{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+#anim_8{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+#anim_9{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+#anim_10{
+    width: var(--video_box_width);
+    height: var(--video_box_height);
+    visibility: hidden;
+}
+
+/*-------------------------------------------------------------------------*/
+
+/* イベント関係 */
+.event_paper{
+    left: 50vw;
+    width: 80vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    opacity: 0.9;
+    visibility: hidden;
+}
+
+/*-------------------*/
+
+.event_talk{
+    position: relative;
+    left: 22vw;
+    top: 9vw;
+    visibility: hidden;
+}
+
+.talk_theme{
+    top: 1vw;
+    width: 54.7vw;
+    text-align: center;
+    font-size: 3vw;
+}
+
+.talk_img{
+    left: 12.5vw;
+    top: 6vw;
+    width: 30vw;
+}
+
+.talk_description{
+    top: 25vw;
+    width: 55vw;
+    text-align: center;
+    line-height: 3vw;
+    font-size: 2vw;
+}
+
+.talk_btn{
+    left: 17.5vw;
+    top: 33vw;
+    width: 20vw;
+    height: 6vw;
+    font-size: 2vw;
+}
+
+/*-------------------*/
+
+.event_choice{
+    position: relative;
+    left: 22vw;
+    top: 9vw;
+    visibility: hidden;
+}
+
+.choice_theme{
+    top: 1vw;
+    width: 55vw;
+    text-align: center;
+    font-size: 3vw;
+}
+
+.choice_imgs{
+    position: relative;
+    left: -3vw;
+    top: 8vw;
+    width: 61vw;
+    /*height:15vw;*/
+    flex: content;
+}
+
+.choice_img1{
+    left: 0;
+    width: 22%;
+    border: 0.8vw solid white;
+    border-radius: 50%;
+}
+
+.choice_img2{
+    left: 25%;
+    width: 22%;
+    border: 0.8vw solid white;
+    border-radius: 50%;
+}
+
+.choice_img3{
+    left: 50%;
+    width: 22%;
+    border: 0.8vw solid white;
+    border-radius: 50%;
+}
+
+.choice_img4{
+    left: 75%;
+    width: 22%;
+    border: 0.8vw solid white;
+    border-radius: 50%;
+}
+
+.choice_description{
+    top: 25vw;
+    width: 55vw;
+    text-align: center;
+    line-height: 3vw;
+    font-size: 2vw;
+}
+
+.choice_btn{
+    left: 17.5vw;
+    top: 33vw;
+    width: 20vw;
+    height: 6vw;
+    font-size: 2vw;
+}
+
+/*-------------------*/
+
+.event_quiz1{
+    position: relative;
+    left: 22vw;
+    top: 9vw;
+    visibility: hidden;
+}
+
+.quiz1_question{
+    width: 55vw;
+    text-align: center;
+    font-size: 2.3vw;
+}
+
+.quiz1_img{
+    left: 13vw;
+    top: 4.5vw;
+    width: 27vw;
+}
+
+.quiz1_anss{
+    top: 22vw;
+}
+
+.quiz1_ans1{
+    left: 16vw;
+    width: 20vw;
+    height: 8vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    font-size: 1.3vw;
+}
+
+.quiz1_ans2{
+    left: 38vw;
+    width: 20vw;
+    height: 8vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    font-size: 1.3vw;
+}
+
+.quiz1_ans3{
+    left: 16vw;
+    top: 10vw;
+    width: 20vw;
+    height: 8vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    font-size: 1.3vw;
+}
+
+.quiz1_ans4{
+    left: 38vw;
+    top: 10vw;
+    width: 20vw;
+    height: 8vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    font-size: 1.3vw;
+}
+
+/*-------------------*/
+
+.event_quiz2{
+    position: relative;
+    left: 22vw;
+    top: 9vw;
+    visibility: hidden;
+}
+
+.quiz2_question{
+    top: 1vw;
+    width: 55vw;
+    text-align: center;
+    font-size: 2.3vw;
+}
+
+.quiz2_ans1{
+    left: 14vw;
+    top: 8vw;
+    width: 25vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+.quiz2_ans2{
+    left: 41vw;
+    top: 8vw;
+    width: 25vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+.quiz2_ans3{
+    left: 14vw;
+    top: 24vw;
+    width: 25vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+.quiz2_ans4{
+    left: 41vw;
+    top: 24vw;
+    width: 25vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+/*-------------------*/
+
+.event_game1{
+    left: 21vw;
+    top: 8vw;
+    visibility: hidden;
+}
+
+.game1_theme{
+    width: 57vw;
+    font-size: 2.5vw;
+}
+
+.game1_description{
+    top: 4vw;
+    width: 57vw;
+    font-size: 1.5vw;
+}
+
+.game1_board_img{
+    top: 8vw;
+    width: 57vw;
+}
+
+.game1_board{
+    top: 8vw;
+    width: 57vw;
+}
+
+.game1_line1{
+    position: relative;
+    left: 2vw;
+    top: 3.5vw;
+}
+.game1_card1{
+    width: 8vw;
+}
+.game1_card2{
+    left: 9vw;
+    width: 8vw;
+}
+.game1_card3{
+    left: 18vw;
+    width: 8vw;
+}
+.game1_card4{
+    left: 27vw;
+    width: 8vw;
+}
+.game1_card5{
+    left: 36vw;
+    width: 8vw;
+}
+.game1_card6{
+    left: 45vw;
+    width: 8vw;
+}
+
+.game1_line2{
+    position: relative;
+    left: 2vw;
+    top: 17vw;
+}
+.game1_card7{
+    width: 8vw;
+}
+.game1_card8{
+    left: 9vw;
+    width: 8vw;
+}
+.game1_card9{
+    left: 18vw;
+    width: 8vw;
+}
+.game1_card10{
+    left: 27vw;
+    width: 8vw;
+}
+.game1_card11{
+    left: 36vw;
+    width: 8vw;
+}
+.game1_card12{
+    left: 45vw;
+    width: 8vw;
+}
+
+.complete_msg{
+    left: 9vw;
+    top: 13vw;
+    color: white;
+    font-size: 6vw;
+    visibility: hidden;
+}
+
+/*-------------------*/
+
+.event_game2{
+    left: 21vw;
+    top: 8vw;
+    visibility: hidden;
+}
+
+.game2_theme{
+    width: 57vw;
+    font-size: 2.5vw;
+}
+
+.game2_description{
+    top: 4vw;
+    width: 57vw;
+    font-size: 1.5vw;
+}
+
+.game2_board_img{
+    top: 8vw;
+    width: 57vw;
+}
+
+.game2_board{
+    top: 8vw;
+    width: 57vw;
+    color: white;
+    font-size: 2vw;
+}
+
+.game2_rule_title{
+    left: 28.5vw;
+    top: 3vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+.game2_rules{
+    left: 8vw;
+    top: 8.7vw;
+    width: 50vw;
+}
+
+.game2_rule1{
+    top: 0;
+}
+
+.game2_rule2{
+    top: 5vw;
+}
+
+.game2_rule3{
+    top: 10vw;
+}
+
+.game2_look_btn{
+    left: 28.5vw;
+    top: 24vw;
+    width: 14vw;
+    height: 5vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    font-size: 2vw;
+}
+
+.game2_gesture_theme_div{
+    visibility: hidden;
+}
+
+.game2_sketch{
+    left: 29vw;
+    top: 2vw;
+    width: 37vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+.game2_theme_is{
+    left: 14vw;
+    top: 7vw;
+    width: 15vw;
+    font-size: 3vw;
+    color: black;
+}
+
+.game2_gesture_theme{
+    left: 33vw;
+    top: 15.5vw;
+    width: 30vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    font-size: 7vw;
+    color: black;
+}
+
+/*-------------------*/
+
+.event_game3{
+    left: 21vw;
+    top: 8vw;
+    visibility: hidden;
+}
+
+.game3_theme{
+    width: 57vw;
+    font-size: 2.5vw;
+}
+
+.game3_description{
+    top: 4vw;
+    width: 57vw;
+    font-size: 1.5vw;
+}
+
+.game3_board_img{
+    top: 8vw;
+    width: 57vw;
+}
+
+.card_deck{
+    left: 5vw;
+    top: 13vw;
+    width: 15vw;
+}
+
+.move_card{
+    left: 5vw;
+    top: 13vw;
+    width: 15vw;
+}
+
+.open_card{
+    left: 37vw;
+    top: 13vw;
+    width: 15vw;
+    visibility: hidden;
+}
+
+.card_sum{
+    left: 25.6vw;
+    top: 15.5vw;
+    width:10vw;
+    color: white;
+    font-size: 2vw;
+}
+
+.card_num_sum{
+    left: 21.5vw;
+    top: 20vw;
+    width: 15vw;
+    text-align: center;
+    color: white;
+    font-size: 6vw;
+}
+
+.open_card_btn{
+    left: 23.9vw;
+    top: 29vw;
+    width: 10vw;
+    height: 4vw;
+    font-size: 1vw;
+}
+
+/*-------------------*/
+
+.start_flag{
+    top: 12vw;
+    left: 30vw;
+    width: 40vw;
+    visibility: hidden;
+}
+
+.timeup_flag{
+    top: 12vw;
+    left: 30vw;
+    width: 40vw;
+    visibility: hidden;
+}
+
+/*-------------------------------------------------------------------------*/
+
+.ship{
+    left: 110vw;
+    top: 33vw;
+    width: 20vw;
+    transform: scale(1, 1);
+    z-index: -1;
+}
+
+/*-------------------------------------------------------------------------*/
+
+#tresurebox_anim{
+    top: 35vw;
+    max-width: 100vw;
+    visibility: hidden;
+}
+
+/*-------------------*/
+
+.result_paper{
+    left: 50vw;
+    width: 75vw;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    opacity: 0.9;
+    visibility: hidden;
+}
+
+.result{
+    left: 22vw;
+    top: 6vw;
+    font-family: "otutome";
+    font-size: 4vw;
+    visibility: hidden;
+}
+
+.result_title{
+    left: 25vw;
+    font-size: 3vw;
+}
+
+.result_clear{
+    top: 7vw;
+    width: 60vw;
+    text-align: center;
+    font-size: 3.7vw;
+}
+
+.result_answer{
+    top: 14.5vw;
+    width: 60vw;
+    text-align: center;
+    font-size: 2vw;
+}
+
+.result_description{
+    top: 19vw;
+    width: 61vw;
+    text-align: center;
+    line-height: 3vw;
+    font-size: 1.7vw;
+}
+
+.result_coins{
+    left: 6vw;
+    top: 12vw;
+    width: 50vw;
+}
+
+.result_normal_point{
+    left: 16vw;
+    top: 28vw;
+    width: 60vw;
+    font-size: 2.5vw;
+    color: red;
+}
+
+.result_bonus_point{
+    left: 16vw;
+    top: 33vw;
+    width: 60vw;
+    font-size: 2.5vw;
+    color: red;
+}
+
+.result_turn_point{
+    left: 16vw;
+    top: 38vw;
+    width: 60vw;
+    font-size: 2.5vw;
+    color: red;
+}
+
+/*-------------------------------------------------------------------------*/
+
+.end_video_box{
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 56.25vw;
+    margin: auto;
+    overflow: hidden;
+}
+
+.ending{
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.end_teamname_c{
+    width: 60vw;
+    height: 11.25vw;
+    transform: translate(2.5%, 92.5%);
+    text-align: left;   /*左揃え*/
+    font-family: "玉ねぎ楷書激無料版V7改";
+    font-size: 2.81vw;
+    color: #FFF;
+    animation: end_move1 0.5s 1 normal; /*下で定義したアニメーションを(0.5秒かけて)再生*/
+    z-index: 11;
+}
+
+@keyframes end_move1{
+    0%{
+        transform: translate(-100%, 92.5%);
+    }
+
+    100%{
+        transform: translate(2.5%, 92.5%);
+    }
+}
+
+.end_subtotal_c{
+    width:60vw;
+    height:11.25vw;
+    transform: translate(-48%, 165%);
+    text-align:right;   /*右揃え*/
+    font-family: "ラノベPOP v2";
+    font-size:2.81vw;
+    color:#FFF;
+    animation: end_move2 0.5s 1 normal;
+    z-index: 11;
+}
+
+@keyframes end_move2{
+    0%{
+        transform: translate(-110%, 165%);
+    }
+    100%{
+        transform: translate(-48%, 165%);
+    }
+}
+
+.end_bonus_c{
+    text-align:right;   /*右揃え*/
+    width:60vw;
+    height:11.25vw;
+    transform: translate(-48%, 200%);
+    font-family: "ラノベPOP v2";
+    font-size:2.81vw;
+    color:#FFF;
+    animation: end_move3 0.5s 1 normal;
+    z-index: 11;
+}
+
+@keyframes end_move3{
+    0%{
+        transform: translate(-110%, 200%);
+    }
+    100%{
+        transform: translate(-48%, 200%);
+    }
+}
+
+.end_total_c{
+    width:60vw;
+    height:11.25vw;
+    transform: translate(-48%, 250%);
+    text-align:right;   /*右揃え*/
+    font-family: "ラノベPOP v2";
+    font-size:2.81vw;
+    color:#FFF;
+    animation: end_move4 0.5s 1 normal;
+    z-index: 11;
+}
+
+@keyframes end_move4{
+    0%{
+        transform: translate(-120%, 250%);
+    }
+    100%{
+        transform: translate(-48%, 250%);
+    }
+}
+
+#end_fade{
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.end_fade_c{
+    animation: fadeIn 5s 1 normal;
+}
+
+#end_result{
+    visibility: hidden;
+}
+
+@keyframes fadeIn { /*animation-nameで設定した値を書く*/
+
+    0% {opacity: 0} /*アニメーション開始時は不透明度0%*/
+  
+    100% {opacity: 1} /*アニメーション終了時は不透明度100%*/
+  
+}
